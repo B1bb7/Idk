@@ -1,0 +1,31 @@
+function teleportTO(placeCFrame)
+    local plyr = game.Players.LocalPlayer;
+    if plyr.Character then
+        plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+    end
+end
+function teleportWorld(Map)
+    if workspace.Map:FindFirstChild(Map) then
+        teleportTO(workspace.Map[Map].MapConfiguration.Gamemodes.koth.Part.CFrame)
+    end
+end
+
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+ 
+local PhantomForcesWindow = Library:NewWindow("Combat Warriors")
+ 
+local KillingCheats = PhantomForcesWindow:NewSection("Teleport")
+ 
+ local selectedWorld;
+ 
+ KillingCheats:CreateDropdown("DropDown", {"CrossroadsGamemodes","CrossroadsV2Gamemodes","IsolaSerenaGamemodes","SinnersGraveyardGamemodes"}, 2, function(value)
+   selectedWorld = value;
+print(value)
+end)
+ 
+KillingCheats:CreateButton("Tp", function()
+if selectedWorld then
+        teleportWorld(selectedWorld)
+    end
+end)
+
