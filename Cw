@@ -1,0 +1,35 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Combat Warriors", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+getgenv().TTPlace = "string"
+
+function Teleport(teleportPlace)
+  local player = game.Players.LocalPlayer
+  player.Character.HumanoidRootPart.CFrame = teleportPlace
+  end
+
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddDropdown({
+	Name = "Selected World",
+	Default = "Crossroads",
+	Options = {"Crossroads","CrossroadsV2"},
+	Callback = function(Value)
+	  getgenv().TTPlace = Value
+	end    
+})
+
+Tab:AddButton({
+	Name = "Teleport",
+	Callback = function()
+	  if getgenv().TPPlace == "Crossroads" then
+	    Teleport(workspace.Map.CrossroadsGamemodes.MapConfiguration.Gamemodes.koth.Part.CFrame)
+	  elseif getgenv().TTPlace == "CrossroadsV2" then
+      Teleport(workspace.Map.CrossroadsV2Gamemodes.MapConfiguration.Gamemodes.koth.Part.CFrame)
+      end
+    end
+    })
